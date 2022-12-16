@@ -23,11 +23,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-          cache: 'pip'
       - name: Update pip
         run: python -m pip install --upgrade pip
       - name: Install wheel
@@ -55,7 +50,6 @@ jobs:
         uses: ./
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
           allow-build: info
       - name: Check Python version
         run: python ./.github/scripts/check_python_version.py ${{ matrix.python-version }}
