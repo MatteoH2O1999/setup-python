@@ -25,6 +25,14 @@ inputs:
   update-environment:
     description: "Set this option if you want the action to update environment variables."
     default: true
+  cache-build:
+    required: false
+    description: Whether to cache the built Python distribution to speed up successive runs (true or false, defaults to false).
+    default: false
+  allow-build:
+    required: false
+    description: "Set the behavior of the actoin when actions/setup-python fails and has to build from source. Supported values: allow, info, warn, error"
+    default: warn
 outputs:
   python-version:
     description: "The installed Python or PyPy version. Useful when given a version range as input."
