@@ -46,8 +46,8 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Check if Python version is deprecated and eventually build it
-      uses: MatteoH2O1999/build-and-install-python@v0
+    - uses: MatteoH2O1999/build-and-install-python@v0
+      id: build
       with:
         python-version: ${{ inputs.python-version }}
         python-version-file: ${{ inputs.python-version-file }}
@@ -55,12 +55,10 @@ runs:
         cache-build: ${{ inputs.cache-build }}
         allow-build: ${{ inputs.allow-build }}
         token: ${{ inputs.token }}
-    - name: Setup Python ${{ inputs.python-version }}
-      uses: actions/setup-python@v4
+    - uses: actions/setup-python@v4
       id: setup
       with:
-        python-version: ${{ inputs.python-version }}
-        python-version-file: ${{ inputs.python-version-file }}
+        python-version: ${{ steps.build.outputs.python-version }}
         cache: ${{ inputs.cache }}
         architecture: ${{ inputs.architecture }}
         check-latest: ${{ inputs.check-latest }}
