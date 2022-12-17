@@ -1,5 +1,5 @@
 author: MatteoH2O1999
-name: Setup Python
+name: Build and Setup Python
 branding:
   icon: play-circle
   color: blue
@@ -50,9 +50,11 @@ runs:
       uses: MatteoH2O1999/build-and-install-python@v0
       with:
         python-version: ${{ inputs.python-version }}
+        python-version-file: ${{ inputs.python-version-file }}
         architecture: ${{ inputs.architecture }}
         cache-build: ${{ inputs.cache-build }}
         allow-build: ${{ inputs.allow-build }}
+        token: ${{ inputs.token }}
     - name: Setup Python ${{ inputs.python-version }}
       uses: actions/setup-python@v4
       id: setup
