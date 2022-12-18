@@ -2,11 +2,11 @@ import sys
 
 def check_version(version):
     split_version = version.split('.')
-    if int(split_version[0]) != sys.version_info.major:
+    if int(split_version[0]) != sys.version_info[0]:
         return False
-    if split_version[1] != 'x' and int(split_version[1]) != sys.version_info.minor:
+    if split_version[1] != 'x' and int(split_version[1]) != sys.version_info[1]:
         return False
-    if split_version[2] != 'x' and int(split_version[2]) != sys.version_info.micro:
+    if split_version[2] != 'x' and int(split_version[2]) != sys.version_info[2]:
         return False
     return True
 
