@@ -1,0 +1,31 @@
+name: Check specific version
+
+on:
+  workflow_dispatch:
+    inputs:
+      python-version:
+        required: true
+        description: The specific version to check
+        type: string
+
+jobs:
+  test_python_build:
+    runs-on: ${{ matrix.os }}
+    name: Test build Python ${{ inputs.python-version }} for ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Test action with Python ${{ inputs.python-version }}
+        id: build
+        uses: ./
+        with:
+          python-version: ${{ inputs.python-version }}
+          allow-build: info
+      - name: Check Python version
+        run: python ./.github/scripts/check_python_version.py ${{ inputs.python-version }}

@@ -60,7 +60,7 @@ runs:
       with:
         python-version: ${{ steps.build.outputs.python-version }}
         cache: ${{ inputs.cache }}
-        architecture: ${{ inputs.architecture }}
+        architecture: ${{ steps.build.outputs.architecture }}
         check-latest: ${{ inputs.check-latest }}
         token: ${{ inputs.token }}
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
