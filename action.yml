@@ -46,7 +46,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: MatteoH2O1999/build-and-install-python@v0
+    - uses: MatteoH2O1999/build-and-install-python@1efa1567b4b2024358e368e0d322ba633546212b
       id: build
       with:
         python-version: ${{ inputs.python-version }}
@@ -55,7 +55,7 @@ runs:
         cache-build: ${{ inputs.cache-build }}
         allow-build: ${{ inputs.allow-build }}
         token: ${{ inputs.token }}
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435
       id: setup
       with:
         python-version: ${{ steps.build.outputs.python-version }}
