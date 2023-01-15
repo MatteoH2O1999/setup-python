@@ -31,7 +31,7 @@ inputs:
     default: false
   allow-build:
     required: false
-    description: "Set the behavior of the actoin when actions/setup-python fails and has to build from source. Supported values: allow, info, warn, error"
+    description: "Set the behavior of the action when actions/setup-python fails and has to be built from source. Supported values: allow, info, warn, error. Default: warn"
     default: warn
 outputs:
   python-version:
@@ -65,3 +65,8 @@ runs:
         token: ${{ inputs.token }}
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         update-environment: ${{ inputs.update-environment }}
+    - run: ${{ github.action_path }}/setup_pip.ps1
+      shell: pwsh
+      env:
+        PYTHON_VERSION: ${{ steps.setup.outputs.python-version }}
+        SETUP_PYTHON_PATH: ${{ steps.setup.outputs.python-path }}
