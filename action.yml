@@ -38,7 +38,7 @@ outputs:
     description: "The installed Python or PyPy version. Useful when given a version range as input."
     value: ${{ steps.setup.outputs.python-version }}
   cache-hit:
-    description: "A boolean value to indicate a cache entry was found"
+    description: "A boolean value to indicate a cache entry was found."
     value: ${{ steps.setup.outputs.cache-hit }}
   python-path:
     description: "The absolute path to the Python or PyPy executable."
