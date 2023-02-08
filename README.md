@@ -1,6 +1,8 @@
 # Build and Setup Python
 
 [![CI/CD](https://github.com/MatteoH2O1999/setup-python/actions/workflows/test.yml/badge.svg)](https://github.com/MatteoH2O1999/setup-python/actions/workflows/test.yml)
+[![codecov](https://codecov.io/github/MatteoH2O1999/build-and-install-python/branch/master/graph/badge.svg?token=5HU95AOQ8J)](https://codecov.io/github/MatteoH2O1999/build-and-install-python)
+![GitHub](https://img.shields.io/github/license/MatteoH2O1999/setup-python)
 
 This action wraps around [actions/setup-python](https://github.com/actions/setup-python) allowing for deprecated CPython versions to be built from source instead of leading to a failure while appearing transparent in all other cases.
 
