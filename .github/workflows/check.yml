@@ -23,7 +23,7 @@ jobs:
           submodules: recursive
       - name: Test action with Python ${{ inputs.python-version }}
         id: build
-        uses: ./
+        uses: MatteoH2O1999/setup-python@master
         with:
           python-version: ${{ inputs.python-version }}
           allow-build: info
