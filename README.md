@@ -1,6 +1,7 @@
 # Build and Setup Python
 
 [![CI/CD](https://github.com/MatteoH2O1999/setup-python/actions/workflows/test.yml/badge.svg)](https://github.com/MatteoH2O1999/setup-python/actions/workflows/test.yml)
+[![Periodic Check](https://github.com/MatteoH2O1999/setup-python/actions/workflows/periodic_check.yml/badge.svg)](https://github.com/MatteoH2O1999/setup-python/actions/workflows/periodic_check.yml)
 [![codecov](https://codecov.io/github/MatteoH2O1999/build-and-install-python/branch/master/graph/badge.svg?token=5HU95AOQ8J)](https://codecov.io/github/MatteoH2O1999/build-and-install-python)
 ![GitHub](https://img.shields.io/github/license/MatteoH2O1999/setup-python)
 
