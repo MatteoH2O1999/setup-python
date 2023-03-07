@@ -52,6 +52,7 @@ runs:
         python-version: ${{ inputs.python-version }}
         python-version-file: ${{ inputs.python-version-file }}
         architecture: ${{ inputs.architecture }}
+        check-latest: ${{ inputs.check-latest }}
         cache-build: ${{ inputs.cache-build }}
         allow-build: ${{ inputs.allow-build }}
         token: ${{ inputs.token }}
