@@ -122,7 +122,7 @@ This action supports the following inputs (in bold are the names of the exclusiv
 |python-version-file|File containing the Python version to use. Reads from `.python-version` if both this and `python-version` are unset.|`.python-version`, `path/to/python/version`, ...|`None`|
 |cache|Used to specify a package manager for caching in the default directory.|`pip`, `pipenv` and `poetry`|`None`|
 |architecture|The target architecture of the Python or PyPy interpreter.|`x64`, `x86`, `arm64`, ...|`None`|
-|check-latest|Set this option if you want the action to check for the latest available version that satisfies the version spec (temporarily disabled).|`false`, `true`|`false`|
+|check-latest|Set this option if you want the action to check for the latest available version that satisfies the version spec.|`false`, `true`|`false`|
 |token|The token used to authenticate when fetching Python distributions from [actions/python-versions](https://github.com/actions/python-versions). When running this action on github.com, the default value is sufficient. When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.|example: `TokenString`|`github.token`|
 |cache-dependency-path|Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.|example: `path/to/dependency/files`|`''`|
 |update-environment|Set this option if you want the action to update environment variables.|`true`, `false`|`true`|
