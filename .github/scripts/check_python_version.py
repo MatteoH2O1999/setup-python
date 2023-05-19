@@ -6,7 +6,7 @@ def check_version(version):
         return False
     if split_version[1] != 'x' and int(split_version[1]) != sys.version_info[1]:
         return False
-    if split_version[2] != 'x' and int(split_version[2]) != sys.version_info[2]:
+    if split_version[2] != 'x' and int(split_version[2].split('-')[0]) != sys.version_info[2]:
         return False
     return True
 
