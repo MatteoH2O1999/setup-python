@@ -5,8 +5,14 @@ on:
     inputs:
       python-version:
         required: true
-        description: The specific version to check
+        description: Specific version to check
         type: string
+      allow-prereleases:
+          required: true
+          default: false
+          description: Include prereleases in the check
+          type: boolean
+
 
 jobs:
   test_python_build:
@@ -27,5 +33,6 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
           allow-build: info
+          allow-prereleases: ${{ inputs.allow-prereleases }}
       - name: Check Python version
         run: python ./.github/scripts/check_python_version.py ${{ inputs.python-version }}

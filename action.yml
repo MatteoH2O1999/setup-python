@@ -33,6 +33,9 @@ inputs:
     required: false
     description: "Set the behavior of the action when actions/setup-python fails and has to be built from source. Supported values: allow, info, warn, error. Default: warn"
     default: warn
+  allow-prereleases:
+    description: "When 'true', a version range passed to 'python-version' input will match prerelease versions if no GA versions are found. Only 'x.y' version range is supported for CPython."
+    default: false
 outputs:
   python-version:
     description: "The installed Python or PyPy version. Useful when given a version range as input."
@@ -56,6 +59,7 @@ runs:
         cache-build: ${{ inputs.cache-build }}
         allow-build: ${{ inputs.allow-build }}
         token: ${{ inputs.token }}
+        allow-prereleases: ${{ inputs.allow-prereleases }}
     - uses: actions/setup-python@57ded4d7d5e986d7296eab16560982c6dd7c923b
       id: setup
       with:
