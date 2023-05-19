@@ -1,9 +1,13 @@
 import git
 import json
 import os
+import sys
 import tempfile
 
 json_dict = {"os": ["ubuntu-latest", "windows-latest", "macos-latest"], "python-version": []}
+
+if sys.argv[1] == 'true':
+    json_dict['cache'] = [False, True]
 
 with tempfile.TemporaryDirectory() as temp_dir:
     python_repo = git.Repo.clone_from('https://github.com/python/cpython.git', temp_dir)

@@ -31,7 +31,7 @@ jobs:
         run: pip install -r ./.github/scripts/requirements.txt
       - name: Create matrix
         id: matrix
-        run: python ./.github/scripts/create_python_matrix.py
+        run: python ./.github/scripts/create_python_matrix.py false
   
   # Test the action with all possible combinations of python versions and os
   test_action:
