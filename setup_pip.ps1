@@ -18,7 +18,7 @@ if ([int]$Semver[0] -eq 3 -and [int]$Semver[1] -lt 5) {
         }
     } else {
         Write-Output "Pip is not available for version $Version"
-        Write-Output "Proceed with manualk installation at own risk"
+        Write-Output "Proceed with manual installation at own risk"
     }
 } else {
     Write-Output "Using ensurepip..."
