@@ -31,7 +31,7 @@ inputs:
     default: false
   allow-build:
     required: false
-    description: "Set the behavior of the action when actions/setup-python fails and has to be built from source. Supported values: allow, info, warn, error. Default: warn"
+    description: "Set the behavior of the action when actions/setup-python fails and has to be built from source. Supported values: allow, info, warn, error, force. Default: warn"
     default: warn
   allow-prereleases:
     description: "When 'true', a version range passed to 'python-version' input will match prerelease versions if no GA versions are found. Only 'x.y' version range is supported for CPython."
