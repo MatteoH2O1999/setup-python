@@ -127,7 +127,7 @@ This action supports the following inputs (in bold are the names of the exclusiv
 |cache-dependency-path|Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.|example: `path/to/dependency/files`|`''`|
 |update-environment|Set this option if you want the action to update environment variables.|`true`, `false`|`true`|
 |**cache-build**|Whether to cache the built Python distribution to speed up successive runs.|`true`, `false`|`false`|
-|**allow-build**|Set the behavior of the action when [actions/setup-python](https://github.com/actions/setup-python) fails and has to be built from source.|`allow`, `info`, `warn`, `error`|`warn`|
+|**allow-build**|Set the behavior of the action when [actions/setup-python](https://github.com/actions/setup-python) fails and has to be built from source.|`allow`, `info`, `warn`, `error`, `force`|`warn`|
 
 ### allow-build input
 
@@ -136,7 +136,8 @@ This action can apply for different behaviors when it tries to install a CPython
 - `error` this emulates [actions/setup-python](https://github.com/actions/setup-python) and throws an error (thus failing the job) if the Python version cannot be downloaded from [actions/python-versions](https://github.com/actions/python-versions);
 - `warn`(default) this will proceed to build the specified version of CPython but will still throw a warning. This was chosen as the default behavior as the user may not know a deprecated version has been requested;
 - `info` this will build from source and only print to the logs the fact that a specific Python version will be built from source;
-- `allow` same as `info` but does not even print to logs the fact that CPython will be built from source.
+- `allow` same as `info` but does not even print to logs the fact that CPython will be built from source;
+- `force` this will force Python to be built from source regardless of whether [actions/setup-python](https://github.com/actions/setup-python) supports it or not.
 
 ## Outputs
 
