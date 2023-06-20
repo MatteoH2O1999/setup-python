@@ -2,7 +2,7 @@ $Version = $env:PYTHON_VERSION
 $PythonPath = $env:SETUP_PYTHON_PATH
 $Semver = $Version.Split('.')
 Write-Output "Setting up pip for python $Version in path $PythonPath"
-if ([int]$Semver[0] -eq 3 -and [int]$Semver[1] -lt 5) {
+if (!($Semver[0] -like 'pypy*') -and ([int]$Semver[0] -eq 3 -and [int]$Semver[1] -lt 5)) {
     if ([int]$Semver[1] -gt 2) {
         Write-Output "Using get_pip.py..."
         $VersionNumber = $Semver[0]
