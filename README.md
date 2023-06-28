@@ -74,6 +74,14 @@ The objective of this action is to guarantee that for every major Python version
 
 TLDR: If you use the major version specification (`3.6` instead of `3.6.5`) without specifying the architecture as shown in [Basic usage](#basic-usage) this action is guaranteed to work (hopefully...😉) on all the `...-latest` labels.
 
+### Exceptions
+
+Python versions < 3.5 are too difficult to build from source on Windows.
+For these versions the action tries to use the official installer from [python.org](https://www.python.org/ftp/python).
+If this fails, the action fails with an appropriate error message.
+In this case you should request a version for which [python.org](https://www.python.org/ftp/python) offers a binary installer, and not just the source code.
+On the positive side, every version of Python 2.7 has a binary installer so it shouldn't be a problem.
+
 ## Known limits
 
 This action at the moment does not support:
@@ -81,6 +89,7 @@ This action at the moment does not support:
 - installing multiple Python versions;
 - building PyPy from source;
 - building from source in UNIX systems for a different architecture
+- building shared libraries for UNIX systems
 
 This actions tries to but does not guarantee to work on any arbitrary pair (`python-version`, `architecture`).
 
