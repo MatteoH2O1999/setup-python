@@ -49,7 +49,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: MatteoH2O1999/build-and-install-python@b3bac255307d789f3cbdfdb57d12a10e7e04bbe6
+    - uses: MatteoH2O1999/build-and-install-python@707030a519a2abe1f9d1d9e83d1c7965c6843b7e
       id: build
       with:
         python-version: ${{ inputs.python-version }}
