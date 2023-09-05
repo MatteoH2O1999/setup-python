@@ -15,7 +15,7 @@ jobs:
       matrix-json: ${{ steps.matrix.outputs.matrix }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Update pip
@@ -38,7 +38,7 @@ jobs:
       matrix: ${{ fromJSON(needs.create_matrix.outputs.matrix-json) }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Setup Python ${{ matrix.python-version }}
