@@ -42,7 +42,7 @@ jobs:
         with:
           submodules: recursive
       - name: Setup Python ${{ matrix.python-version }}
-        uses: MatteoH2O1999/setup-python@v1
+        uses: MatteoH2O1999/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
           allow-build: info
