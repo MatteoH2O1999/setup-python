@@ -86,10 +86,9 @@ On the positive side, every version of Python 2.7 has a binary installer so it s
 
 This action at the moment does not support:
 
-- installing multiple Python versions;
-- building PyPy from source;
+- installing multiple Python versions
+- building PyPy from source
 - building from source in UNIX systems for a different architecture
-- building shared libraries for UNIX systems
 
 This actions tries to but does not guarantee to work on any arbitrary pair (`python-version`, `architecture`).
 
