@@ -30,7 +30,7 @@ For a more complete view on the actions see [action.yml](action.yml) or look in 
 In general you could replace the original action with this one and it should already work (all its supported inputs are also supported in this one):
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v1
+- uses: MatteoH2O1999/setup-python@v2
   with:
     python-version: '3.6'
     cache: pip
@@ -39,7 +39,7 @@ In general you could replace the original action with this one and it should alr
 But if you wish for a more optimized experience you could use inputs exclusive to this action:
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v1
+- uses: MatteoH2O1999/setup-python@v2
   with:
     python-version: '3.6'
     allow-build: info
