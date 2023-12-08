@@ -12,6 +12,6 @@ jobs:
     name: Update version tags
     steps:
       - name: Update tags
-        uses: actions/publish-action@v0.2.2
+        uses: actions/publish-action@v0.3.0
         with:
           source-tag: ${{ github.event.release.tag_name }}
