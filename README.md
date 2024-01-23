@@ -22,6 +22,7 @@ This action wraps around [actions/setup-python](https://github.com/actions/setup
   - [Inputs](#inputs)
     - [allow-build input](#allow-build-input)
   - [Outputs](#outputs)
+  - [FAQ](#faq)
   - [Contributing](#contributing)
 
 ## Basic usage
@@ -155,6 +156,14 @@ This action will emit the following outputs:
 |python-version|The installed Python or PyPy version. Useful when given a version range as input.|
 |cache-hit|A boolean value to indicate a cache entry was found (for pip, pipenv and poetry).|
 |python-path|The absolute path to the Python or PyPy executable.|
+
+## FAQ
+
+#### No file in (...) matched to [**/requirements.txt or **/pyproject.toml], make sure you have checked out the target repository
+
+This is a byproduct of [actions/setup-python](https://github.com/actions/setup-python).
+If you wish to cache your pip dependencies, you need to have anywhere in your repository a `requirements.txt` or a `pyproject.toml` file.
+The solution in this case is either creating a blank `requirements.txt` file or stop caching pip (in order to do so simply remove `cache: pip` from your `.yml` file).
 
 ## Contributing
 
