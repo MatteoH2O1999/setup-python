@@ -18,7 +18,10 @@ with tempfile.TemporaryDirectory() as temp_dir:
                 short_tag = tag.name.replace('v', '')
                 while short_tag.count('.') > 1:
                     short_tag = short_tag[:-1]
-                if float(short_tag) >= 2.7 and short_tag not in json_dict['python-version']:
+                splits = short_tag.split('.')
+                major = int(splits[0])
+                minor = int(splits[1])
+                if major == 3 and minor >= 7 and short_tag not in json_dict['python-version']:
                     json_dict['python-version'].append(short_tag)
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
