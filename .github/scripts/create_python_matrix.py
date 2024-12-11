@@ -21,7 +21,7 @@ with tempfile.TemporaryDirectory() as temp_dir:
                 splits = short_tag.split('.')
                 major = int(splits[0])
                 minor = int(splits[1])
-                if major == 3 and minor >= 7 and short_tag not in json_dict['python-version']:
+                if major == 3 and minor >= 8 and short_tag not in json_dict['python-version']:
                     json_dict['python-version'].append(short_tag)
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:

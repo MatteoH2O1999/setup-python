@@ -30,7 +30,7 @@ For a more complete view on the actions see [action.yml](action.yml) or look in 
 In general you could replace the original action with this one and it should already work (all its supported inputs are also supported in this one):
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v4
+- uses: MatteoH2O1999/setup-python@v5
   with:
     python-version: '3.8'
 ```
@@ -38,7 +38,7 @@ In general you could replace the original action with this one and it should alr
 But if you wish for a more optimized experience you could use inputs exclusive to this action:
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v4
+- uses: MatteoH2O1999/setup-python@v5
   with:
     python-version: '3.8'
     allow-build: info
@@ -55,9 +55,9 @@ Older versions may still work, but no effort will be spent in ensuring so.
 
 ## Guarantees
 
-The objective of this action is to guarantee that for every major Python version starting from `3.7` at least one specific version can be successfully installed on the `...-latest` images using the default architecture.
+The objective of this action is to guarantee that for every major Python version starting from `3.8` at least one specific version can be successfully installed on the `...-latest` images using the default architecture.
 
-TLDR: If you use the major version specification (`3.7` instead of `3.7.5`) without specifying the architecture as shown in [Basic usage](#basic-usage) this action is guaranteed to work (hopefully...😉) on all the `...-latest` labels.
+TLDR: If you use the major version specification (`3.8` instead of `3.8.5`) without specifying the architecture as shown in [Basic usage](#basic-usage) this action is guaranteed to work (hopefully...😉) on all the `...-latest` labels.
 
 ## Known limits
 
