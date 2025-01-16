@@ -10,6 +10,8 @@ jobs:
   update_tags:
     runs-on: ubuntu-latest
     name: Update version tags
+    permissions:
+      contents: write
     steps:
       - name: Update tags
         uses: actions/publish-action@v0.3.0

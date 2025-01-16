@@ -8,11 +8,10 @@ on:
         description: Specific version to check
         type: string
       allow-prereleases:
-          required: true
-          default: false
-          description: Include prereleases in the check
-          type: boolean
-
+        required: true
+        default: false
+        description: Include prereleases in the check
+        type: boolean
 
 jobs:
   test_python_build:
@@ -26,6 +25,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           submodules: recursive
       - name: Test action with Python ${{ inputs.python-version }}
         id: build

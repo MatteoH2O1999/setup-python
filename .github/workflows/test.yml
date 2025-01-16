@@ -22,6 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           submodules: recursive
       - name: Update pip
         run: python -m pip install --upgrade pip
@@ -32,7 +33,7 @@ jobs:
       - name: Create matrix
         id: matrix
         run: python ./.github/scripts/create_python_matrix.py false
-  
+
   # Test the action with all possible combinations of python versions and os
   test_action:
     needs: create_matrix
@@ -45,6 +46,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           submodules: recursive
       - name: Setup Python ${{ matrix.python-version }}
         uses: ./
