@@ -20,7 +20,7 @@ jobs:
       matrix-json: ${{ steps.matrix.outputs.matrix }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
           submodules: recursive
@@ -44,7 +44,7 @@ jobs:
       matrix: ${{ fromJSON(needs.create_matrix.outputs.matrix-json) }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
           submodules: recursive
