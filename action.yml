@@ -36,6 +36,9 @@ inputs:
   allow-prereleases:
     description: "When 'true', a version range passed to 'python-version' input will match prerelease versions if no GA versions are found. Only 'x.y' version range is supported for CPython."
     default: false
+  freethreaded:
+    description: "When 'true', use the freethreaded version of Python."
+    default: false
 outputs:
   python-version:
     description: "The installed Python or PyPy version. Useful when given a version range as input."
@@ -60,6 +63,7 @@ runs:
         allow-build: ${{ inputs.allow-build }}
         token: ${{ inputs.token }}
         allow-prereleases: ${{ inputs.allow-prereleases }}
+        freethreaded: ${{ inputs.freethreaded }}
     - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
       id: setup
       with:
@@ -70,6 +74,7 @@ runs:
         token: ${{ inputs.token }}
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         update-environment: ${{ inputs.update-environment }}
+        freethreaded: ${{ steps.build.outputs.freethreaded }}
     - run: ${{ github.action_path }}/setup_pip.ps1
       shell: pwsh
       env:

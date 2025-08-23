@@ -30,7 +30,7 @@ For a more complete view on the actions see [action.yml](action.yml) or look in 
 In general you could replace the original action with this one and it should already work (all its supported inputs are also supported in this one):
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v5
+- uses: MatteoH2O1999/setup-python@v6
   with:
     python-version: '3.8'
 ```
@@ -38,7 +38,7 @@ In general you could replace the original action with this one and it should alr
 But if you wish for a more optimized experience you could use inputs exclusive to this action:
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v5
+- uses: MatteoH2O1999/setup-python@v6
   with:
     python-version: '3.8'
     allow-build: info
@@ -111,6 +111,7 @@ This action supports the following inputs (in bold are the names of the exclusiv
 |token|The token used to authenticate when fetching Python distributions from [actions/python-versions](https://github.com/actions/python-versions). When running this action on github.com, the default value is sufficient. When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.|example: `TokenString`|`github.token`|
 |cache-dependency-path|Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.|example: `path/to/dependency/files`|`''`|
 |update-environment|Set this option if you want the action to update environment variables.|`true`, `false`|`true`|
+|freethreaded| When 'true', use the freethreaded version of Python.|`true`, `false`|`false`|
 |**cache-build**|Whether to cache the built Python distribution to speed up successive runs.|`true`, `false`|`false`|
 |**allow-build**|Set the behavior of the action when [actions/setup-python](https://github.com/actions/setup-python) fails and has to be built from source.|`allow`, `info`, `warn`, `error`, `force`|`warn`|
 
