@@ -111,7 +111,10 @@ This action supports the following inputs (in bold are the names of the exclusiv
 |token|The token used to authenticate when fetching Python distributions from [actions/python-versions](https://github.com/actions/python-versions). When running this action on github.com, the default value is sufficient. When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.|example: `TokenString`|`github.token`|
 |cache-dependency-path|Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.|example: `path/to/dependency/files`|`''`|
 |update-environment|Set this option if you want the action to update environment variables.|`true`, `false`|`true`|
-|freethreaded| When 'true', use the freethreaded version of Python.|`true`, `false`|`false`|
+|freethreaded|When 'true', use the freethreaded version of Python.|`true`, `false`|`false`|
+|allow-prereleases|When 'true', a version range passed to 'python-version' input will match prerelease versions if no GA versions are found. Only 'x.y' version range is supported for CPython.|`true`, `false`|`false`|
+|pip-version|Used to specify the version of pip to install with the Python. Supported format: `major[.minor][.patch]`.|`20.0.0`, `22`|`None`|
+|pip-install|Used to specify the packages to install with pip after setting up Python. Can be a requirements file or package names.|`pandas numpy`, `requirements.txt`|`None`|
 |**cache-build**|Whether to cache the built Python distribution to speed up successive runs.|`true`, `false`|`false`|
 |**allow-build**|Set the behavior of the action when [actions/setup-python](https://github.com/actions/setup-python) fails and has to be built from source.|`allow`, `info`, `warn`, `error`, `force`|`warn`|
 
