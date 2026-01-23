@@ -68,7 +68,7 @@ runs:
         token: ${{ inputs.token }}
         allow-prereleases: ${{ inputs.allow-prereleases }}
         freethreaded: ${{ inputs.freethreaded }}
-    - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
+    - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
       id: setup
       with:
         python-version: ${{ steps.build.outputs.python-version }}
