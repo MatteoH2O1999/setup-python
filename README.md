@@ -13,8 +13,6 @@ This action wraps around [actions/setup-python](https://github.com/actions/setup
   - [Table of contents](#table-of-contents)
   - [Basic usage](#basic-usage)
   - [Motivation](#motivation)
-    - [But why? It's deprecated: just use a more recent version](#but-why-its-deprecated-just-use-a-more-recent-version)
-    - [But why a dedicated action? Just use `ubuntu-20.04` for that 1 job](#but-why-a-dedicated-action-just-use-ubuntu-2004-for-that-1-job)
   - [Guarantees](#guarantees)
   - [Known limits](#known-limits)
   - [Performance](#performance)
@@ -22,6 +20,8 @@ This action wraps around [actions/setup-python](https://github.com/actions/setup
   - [Inputs](#inputs)
     - [allow-build input](#allow-build-input)
   - [Outputs](#outputs)
+  - [FAQ](#faq)
+    - [No file in (...) matched to \[\*\*/requirements.txt or \*\*/pyproject.toml\], make sure you have checked out the target repository](#no-file-in--matched-to-requirementstxt-or-pyprojecttoml-make-sure-you-have-checked-out-the-target-repository)
   - [Contributing](#contributing)
 
 ## Basic usage
@@ -30,18 +30,17 @@ For a more complete view on the actions see [action.yml](action.yml) or look in 
 In general you could replace the original action with this one and it should already work (all its supported inputs are also supported in this one):
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v1
+- uses: MatteoH2O1999/setup-python@v6
   with:
-    python-version: '3.6'
-    cache: pip
+    python-version: '3.8'
 ```
 
 But if you wish for a more optimized experience you could use inputs exclusive to this action:
 
 ```yaml
-- uses: MatteoH2O1999/setup-python@v1
+- uses: MatteoH2O1999/setup-python@v6
   with:
-    python-version: '3.6'
+    python-version: '3.8'
     allow-build: info
     cache-build: true
     cache: pip
@@ -49,37 +48,23 @@ But if you wish for a more optimized experience you could use inputs exclusive t
 
 ## Motivation
 
-Since the replacement of `ubuntu-20.04` with `ubuntu-22.04` runner images [actions/setup-python](https://github.com/actions/setup-python) no longer supports `Python 3.6` for the `ubuntu-latest` label.
-This broke a large number of pipelines as Python 3.6 is still widely used.
+While initially this action was meant to guarantee a successful build of all CPython versions `2.7`, it has now become too complex to maintain it.
 
-This made apparent that a way to support deprecated versions was needed.
-
-### But why? It's deprecated: just use a more recent version
-
-Yes, in a perfect world that would be the go to solution.
-Unfortunately, we do not live in that world, so we can't always choose our dependencies.
-In fact, I would be willing to bet that most deprecated dependencies are there despite the developers, not because of them.
-That is why this action came about: to offer an easier way to continue supporting deprecated builds even if github does not anymore.
-
-### But why a dedicated action? Just use `ubuntu-20.04` for that 1 job
-
-Once again, that is possible, but that is
-
-1. not good practice as editing the main job matrix will not edit the "special" one;
-2. a pain to maintain as each new deprecated version needs another job to be created.
+The new objective of this action is to provide a buffer when something gets yanked out by Github, as this will guarantee that if the pair `(label, version)` works, it will keep working.
+Older versions may still work, but no effort will be spent in ensuring so.
 
 ## Guarantees
 
-The objective of this action is to guarantee that for every major Python version starting from `2.7` at least one specific version can be successfully installed on the `...-latest` images using the default architecture.
+The objective of this action is to guarantee that for every major Python version starting from `3.8` at least one specific version can be successfully installed on the `...-latest` images using the default architecture.
 
-TLDR: If you use the major version specification (`3.6` instead of `3.6.5`) without specifying the architecture as shown in [Basic usage](#basic-usage) this action is guaranteed to work (hopefully...😉) on all the `...-latest` labels.
+TLDR: If you use the major version specification (`3.8` instead of `3.8.5`) without specifying the architecture as shown in [Basic usage](#basic-usage) this action is guaranteed to work (hopefully...😉) on all the `...-latest` labels.
 
 ## Known limits
 
 This action at the moment does not support:
 
-- installing multiple Python versions;
-- building PyPy from source;
+- installing multiple Python versions
+- building PyPy from source
 - building from source in UNIX systems for a different architecture
 
 This actions tries to but does not guarantee to work on any arbitrary pair (`python-version`, `architecture`).
@@ -126,6 +111,10 @@ This action supports the following inputs (in bold are the names of the exclusiv
 |token|The token used to authenticate when fetching Python distributions from [actions/python-versions](https://github.com/actions/python-versions). When running this action on github.com, the default value is sufficient. When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.|example: `TokenString`|`github.token`|
 |cache-dependency-path|Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.|example: `path/to/dependency/files`|`''`|
 |update-environment|Set this option if you want the action to update environment variables.|`true`, `false`|`true`|
+|freethreaded|When 'true', use the freethreaded version of Python.|`true`, `false`|`false`|
+|allow-prereleases|When 'true', a version range passed to 'python-version' input will match prerelease versions if no GA versions are found. Only 'x.y' version range is supported for CPython.|`true`, `false`|`false`|
+|pip-version|Used to specify the version of pip to install with the Python. Supported format: `major[.minor][.patch]`.|`20.0.0`, `22`|`None`|
+|pip-install|Used to specify the packages to install with pip after setting up Python. Can be a requirements file or package names.|`pandas numpy`, `requirements.txt`|`None`|
 |**cache-build**|Whether to cache the built Python distribution to speed up successive runs.|`true`, `false`|`false`|
 |**allow-build**|Set the behavior of the action when [actions/setup-python](https://github.com/actions/setup-python) fails and has to be built from source.|`allow`, `info`, `warn`, `error`, `force`|`warn`|
 
@@ -148,6 +137,14 @@ This action will emit the following outputs:
 |python-version|The installed Python or PyPy version. Useful when given a version range as input.|
 |cache-hit|A boolean value to indicate a cache entry was found (for pip, pipenv and poetry).|
 |python-path|The absolute path to the Python or PyPy executable.|
+
+## FAQ
+
+### No file in (...) matched to [**/requirements.txt or **/pyproject.toml], make sure you have checked out the target repository
+
+This is a byproduct of [actions/setup-python](https://github.com/actions/setup-python).
+If you wish to cache your pip dependencies, you need to have anywhere in your repository a `requirements.txt` or a `pyproject.toml` file.
+The solution in this case is either creating a blank `requirements.txt` file or stop caching pip (in order to do so simply remove `cache: pip` from your `.yml` file).
 
 ## Contributing
 

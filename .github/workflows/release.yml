@@ -10,8 +10,10 @@ jobs:
   update_tags:
     runs-on: ubuntu-latest
     name: Update version tags
+    permissions:
+      contents: write
     steps:
       - name: Update tags
-        uses: actions/publish-action@v0.2.2
+        uses: actions/publish-action@v0.4.0
         with:
           source-tag: ${{ github.event.release.tag_name }}

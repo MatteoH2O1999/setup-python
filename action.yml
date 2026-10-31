@@ -36,6 +36,13 @@ inputs:
   allow-prereleases:
     description: "When 'true', a version range passed to 'python-version' input will match prerelease versions if no GA versions are found. Only 'x.y' version range is supported for CPython."
     default: false
+  freethreaded:
+    description: "When 'true', use the freethreaded version of Python."
+    default: false
+  pip-version:
+    description: "Used to specify the version of pip to install with the Python. Supported format: major[.minor][.patch]."
+  pip-install:
+    description: "Used to specify the packages to install with pip after setting up Python. Can be a requirements file or package names."
 outputs:
   python-version:
     description: "The installed Python or PyPy version. Useful when given a version range as input."
@@ -52,7 +59,7 @@ env:
 runs:
   using: composite
   steps:
-    - uses: MatteoH2O1999/build-and-install-python@004dc2989b38616af18eb8aba45fe49d5f813264
+    - uses: MatteoH2O1999/build-and-install-python@a6b9b8e2b6b4f57808cb6b7707b160744354860a
       id: build
       with:
         python-version: ${{ inputs.python-version }}
@@ -63,7 +70,8 @@ runs:
         allow-build: ${{ inputs.allow-build }}
         token: ${{ inputs.token }}
         allow-prereleases: ${{ inputs.allow-prereleases }}
-    - uses: actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0
+        freethreaded: ${{ inputs.freethreaded }}
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
       id: setup
       with:
         python-version: ${{ steps.build.outputs.python-version }}
@@ -73,6 +81,9 @@ runs:
         token: ${{ inputs.token }}
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         update-environment: ${{ inputs.update-environment }}
+        freethreaded: ${{ steps.build.outputs.freethreaded }}
+        pip-version: ${{ inputs.pip-version }}
+        pip-install: ${{ inputs.pip-install }}
     - run: ${{ github.action_path }}/setup_pip.ps1
       shell: pwsh
       env:

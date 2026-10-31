@@ -1,6 +1,6 @@
 import sys
 
-def check_version(version):
+def check_version(version, freethreaded):
     split_version = version.split('.')
     if int(split_version[0]) != sys.version_info[0]:
         return False
@@ -8,11 +8,21 @@ def check_version(version):
         return False
     if split_version[2] != 'x' and int(split_version[2].split('-')[0]) != sys.version_info[2]:
         return False
+    if freethreaded:
+        try:
+            if sys._is_gil_enabled():
+                return False
+        except:
+            return False
     return True
 
 if __name__ == '__main__':
     version = sys.argv[1]
+    freethreaded = False
+    if version.endswith("t"):
+        freethreaded = True
+        version = version[:-1]
     while version.count('.') < 2:
         version += '.x'
-    if not check_version(version):
+    if not check_version(version, freethreaded):
         raise ValueError('Expected python version to be ' + str(version) + ', got ' + str(sys.version_info.major) + '.' + str(sys.version_info.minor) + '.' + str(sys.version_info.micro) + '.')

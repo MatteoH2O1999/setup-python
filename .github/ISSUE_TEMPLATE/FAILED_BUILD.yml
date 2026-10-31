@@ -1,0 +1,47 @@
+name: CPython failed build
+description: File a report for a failed build on a specific Python version
+title: "[Failed Build]: "
+labels:
+  - bug
+assignees:
+  - MatteoH2O1999
+body:
+  - type: input
+    id: version
+    validations:
+      required: true
+    attributes:
+      label: CPython version
+      description: Which CPython version were you trying to build?
+      placeholder: x.y.z
+  - type: dropdown
+    id: labels
+    validations:
+      required: true
+    attributes:
+      label: Failed labels
+      description: On which labels does the build fail?
+      multiple: true
+      options:
+        - "ubuntu-latest"
+        - "windows-latest"
+        - "macos-latest"
+  - type: dropdown
+    id: runner
+    validations:
+      required: true
+    attributes:
+      label: Used runners
+      description: Which runner type have you used?
+      multiple: false
+      options:
+        - "Github-hosted"
+        - "Self-hosted"
+  - type: input
+    id: logs
+    validations:
+      required: true
+    attributes:
+      label: Failed build logs
+      description: Please paste a link to the failed workflow run below (or, if a private repository, a link to a text file containing the logs)
+      placeholder: https://github.com/MatteoH2O1999/setup-python/actions/runs/5367028286
