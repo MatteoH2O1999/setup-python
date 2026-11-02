@@ -41,8 +41,12 @@ inputs:
     default: false
   pip-version:
     description: "Used to specify the version of pip to install with the Python. Supported format: major[.minor][.patch]."
-  pip-install:
-    description: "Used to specify the packages to install with pip after setting up Python. Can be a requirements file or package names."
+  mirror:
+    description: "Base URL for downloading Python distributions (only applies to CPython; PyPy and GraalPy are unaffected). Defaults to https://raw.githubusercontent.com/actions/python-versions/main. See docs/advanced-usage.md for details."
+    default: "https://raw.githubusercontent.com/actions/python-versions/main"
+  mirror-token:
+    description: "Token used to authenticate requests to the host named in 'mirror'. Sent verbatim as the Authorization header, so include a scheme if your mirror needs one (e.g. 'Bearer <token>')."
+    required: false
 outputs:
   python-version:
     description: "The installed Python or PyPy version. Useful when given a version range as input."
@@ -57,6 +61,7 @@ runs:
   using: composite
   steps:
     - uses: MatteoH2O1999/build-and-install-python@07ceb2c54f202636735639350740db185cd2fad8
+      if: ${{ inputs.mirror == 'https://raw.githubusercontent.com/actions/python-versions/main' }}
       id: build
       with:
         python-version: ${{ inputs.python-version }}
@@ -71,13 +76,14 @@ runs:
     - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
       id: setup
       with:
-        python-version: ${{ steps.build.outputs.python-version }}
+        python-version: ${{ steps.build.outcome == 'skipped' && inputs.python-version || steps.build.outputs.python-version }}
         cache: ${{ inputs.cache }}
-        architecture: ${{ steps.build.outputs.architecture }}
+        architecture: ${{ steps.build.outcome == 'skipped' && inputs.architecture || steps.build.outputs.architecture }}
         check-latest: ${{ inputs.check-latest }}
         token: ${{ inputs.token }}
         cache-dependency-path: ${{ inputs.cache-dependency-path }}
         update-environment: ${{ inputs.update-environment }}
-        freethreaded: ${{ steps.build.outputs.freethreaded }}
+        freethreaded: ${{ steps.build.outcome == 'skipped' && inputs.freethreaded || steps.build.outputs.freethreaded }}
         pip-version: ${{ inputs.pip-version }}
-        pip-install: ${{ inputs.pip-install }}
+        mirror: ${{ inputs.mirror }}
+        mirror-token: ${{ inputs.mirror-token }}
